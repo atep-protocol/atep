@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/intent.handoff.request.json",
+  "title": "handoff request",
+  "description": "Section 8.7. The same object as the handoff message body.",
+  "$ref": "message.handoff.json"
+}

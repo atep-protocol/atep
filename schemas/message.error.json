@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/message.error.json",
+  "title": "error body",
+  "description": "Section 6.2 and Section 6.5.",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "enum": [
+        "malformed",
+        "unsupported_version",
+        "bad_signature",
+        "binding_failed",
+        "declined",
+        "delegation_insufficient",
+        "mandate_required",
+        "out_of_scope",
+        "not_available",
+        "needs_human",
+        "neither_confirm_nor_deny",
+        "rate_limited",
+        "do_not_call",
+        "expired"
+      ]
+    },
+    "detail": {
+      "description": "Section 6.5. An object. It MAY carry text; mandate_required, rate_limited and do_not_call each require more.",
+      "type": "object",
+      "properties": {
+        "text": { "$ref": "common.json#/$defs/free_text" },
+        "terms": { "$ref": "mandate.json#/$defs/terms" },
+        "retry_after": {
+          "description": "Section 6.5. rate_limited. An RFC 3339 time.",
+          "$ref": "common.json#/$defs/timestamp"
+        },
+        "until": {
+          "description": "Section 6.5. do_not_call. An RFC 3339 time, policies.do_not_call_days from now.",
+          "$ref": "common.json#/$defs/timestamp"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "required": ["code", "detail"],
+  "allOf": [
+    {
+      "description": "Section 6.5 and Section 7.2. mandate_required states the exact terms.",
+      "if": { "properties": { "code": { "const": "mandate_required" } }, "required": ["code"] },
+      "then": {
+        "properties": {
+          "detail": { "type": "object", "required": ["terms"] }
+        }
+      }
+    },
+    {
+      "description": "Section 6.5 and Section 10. rate_limited says when to retry.",
+      "if": { "properties": { "code": { "const": "rate_limited" } }, "required": ["code"] },
+      "then": {
+        "properties": {
+          "detail": { "type": "object", "required": ["retry_after"] }
+        }
+      }
+    },
+    {
+      "description": "Section 6.5. do_not_call says how long it applies.",
+      "if": { "properties": { "code": { "const": "do_not_call" } }, "required": ["code"] },
+      "then": {
+        "properties": {
+          "detail": { "type": "object", "required": ["until"] }
+        }
+      }
+    }
+  ],
+  "additionalProperties": true
+}

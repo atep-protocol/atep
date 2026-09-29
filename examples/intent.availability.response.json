@@ -1,0 +1,17 @@
+{
+  "slots": [
+    {
+      "id": "sl_01J8A",
+      "start": "2026-10-06T09:00:00-04:00",
+      "duration_minutes": 30,
+      "provider": "Dr. Alvarez"
+    },
+    {
+      "id": "sl_01J8B",
+      "start": "2026-10-08T09:30:00-04:00",
+      "duration_minutes": 30,
+      "provider": "Dr. Alvarez"
+    }
+  ],
+  "note": "Mornings fill quickly in October."
+}

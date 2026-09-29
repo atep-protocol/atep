@@ -1,0 +1,22 @@
+{
+  "name": "atep",
+  "version": "1.0.0-draft.3",
+  "description": "ATEP, the Agentic Telephone Exchange Protocol: specification, JSON Schemas, examples and validator",
+  "license": "Apache-2.0",
+  "private": true,
+  "type": "module",
+  "homepage": "https://atep.io",
+  "scripts": {
+    "test": "vitest run",
+    "validate": "node validate.mjs"
+  },
+  "dependencies": {
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.0",
+    "vitest": "^4.1.10",
+    "@types/node": "^22.0.0"
+  }
+}

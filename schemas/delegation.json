@@ -1,0 +1,244 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/delegation.json",
+  "title": "ATEP delegation",
+  "description": "Section 7.1. A signed credential from a principal's platform stating what the caller may do for that principal. $defs/credential_payload is the Verifiable Credential payload of the credential field; $defs/healthcare_authorization is the Section 9 extension.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/$defs/body"
+    }
+  ],
+  "properties": {
+    "credential": {
+      "description": "Section 7.1. A JWS over the delegation body signed by the platform's key; its payload is $defs/credential_payload.",
+      "$ref": "common.json#/$defs/jws"
+    }
+  },
+  "required": [
+    "credential"
+  ],
+  "additionalProperties": true,
+  "$defs": {
+    "revocation_response": {
+      "description": "Section 7.1. The body of GET revocation_url.",
+      "type": "object",
+      "properties": {
+        "revoked": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "revoked"
+      ],
+      "additionalProperties": true
+    },
+    "healthcare_authorization": {
+      "description": "Section 9. healthcare_authorization: { statement, authorized_at } - a statement, signed by the platform, that the principal authorized this platform to schedule on their behalf, and the RFC 3339 date of that authorization.",
+      "type": "object",
+      "properties": {
+        "statement": {
+          "$ref": "common.json#/$defs/free_text"
+        },
+        "authorized_at": {
+          "$ref": "common.json#/$defs/date"
+        }
+      },
+      "required": [
+        "statement",
+        "authorized_at"
+      ],
+      "additionalProperties": true
+    },
+    "credential_payload": {
+      "description": "Section 7.1. The payload of the credential JWS, shaped as a W3C Verifiable Credential.",
+      "type": "object",
+      "properties": {
+        "@context": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "const": "https://www.w3.org/ns/credentials/v2"
+          }
+        },
+        "type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "allOf": [
+            {
+              "contains": {
+                "const": "VerifiableCredential"
+              }
+            },
+            {
+              "contains": {
+                "const": "AtepDelegation"
+              }
+            }
+          ]
+        },
+        "issuer": {
+          "description": "Section 7.1. The platform that signed the credential.",
+          "anyOf": [
+            {
+              "$ref": "common.json#/$defs/https_url"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "common.json#/$defs/https_url"
+                }
+              },
+              "required": [
+                "id"
+              ],
+              "additionalProperties": true
+            }
+          ]
+        },
+        "credentialSubject": {
+          "description": "Section 7.1. credentialSubject is the delegation body without credential. Section 9 adds healthcare_authorization.",
+          "allOf": [
+            {
+              "$ref": "#/$defs/body"
+            }
+          ],
+          "type": "object",
+          "properties": {
+            "healthcare_authorization": {
+              "$ref": "#/$defs/healthcare_authorization"
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "@context",
+        "type",
+        "issuer",
+        "credentialSubject"
+      ],
+      "additionalProperties": true
+    },
+    "credential_payload_healthcare": {
+      "description": "Section 9. The credential payload for a session with a healthcare answerer: credentialSubject.healthcare_authorization is REQUIRED.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/credential_payload"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "credentialSubject": {
+              "type": "object",
+              "required": [
+                "healthcare_authorization"
+              ]
+            }
+          },
+          "required": [
+            "credentialSubject"
+          ]
+        }
+      ]
+    },
+    "body": {
+      "description": "Section 7.1. The delegation body: every field except the credential that signs it. This is the shape of credentialSubject.",
+      "type": "object",
+      "properties": {
+        "principal": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "description": "Section 7.1. Opaque and stable for the principal on that platform.",
+              "$ref": "common.json#/$defs/id"
+            },
+            "name": {
+              "description": "Section 7.1. A display name; it need not be a legal name.",
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            },
+            "contact": {
+              "description": "Section 7.1. The number the business may use for this booking.",
+              "$ref": "common.json#/$defs/e164"
+            },
+            "platform": {
+              "description": "Section 7.1. The platform card the credential is verified against.",
+              "$ref": "common.json#/$defs/https_url"
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "contact",
+            "platform"
+          ],
+          "additionalProperties": true
+        },
+        "scope": {
+          "description": "Section 7.1. The intents this delegation covers.",
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/intent_name"
+          },
+          "minItems": 1
+        },
+        "caps": {
+          "description": "Section 7.1. Bounds on the scoped intents.",
+          "type": "object",
+          "properties": {
+            "max_spend": {
+              "$ref": "common.json#/$defs/money"
+            },
+            "date_window": {
+              "$ref": "common.json#/$defs/date_window"
+            },
+            "max_bookings": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": true
+        },
+        "identity_verification": {
+          "description": "Section 7.1. Fixed at \"none\" in v1. The caller MUST NOT answer security questions or supply identity documents, dates of birth, account numbers, or one-time codes.",
+          "const": "none"
+        },
+        "issued": {
+          "$ref": "common.json#/$defs/timestamp"
+        },
+        "expires": {
+          "description": "Section 7.1. No more than 24 hours after issued.",
+          "$ref": "common.json#/$defs/timestamp"
+        },
+        "revocation_url": {
+          "description": "Section 7.1. GET returns 200 with { \"revoked\": bool }.",
+          "$ref": "common.json#/$defs/https_url"
+        }
+      },
+      "required": [
+        "principal",
+        "scope",
+        "caps",
+        "identity_verification",
+        "issued",
+        "expires",
+        "revocation_url"
+      ],
+      "x-atep-max-lifetime": {
+        "description": "Section 7.1. expires MUST be no more than 24 hours after issued.",
+        "from": "issued",
+        "to": "expires",
+        "maxSeconds": 86400
+      },
+      "additionalProperties": true
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "description": {
+    "service": "new-patient",
+    "text": "Self-pay price for a first visit.",
+    "quantity": 1,
+    "location": "Indianapolis, IN"
+  },
+  "budget": {
+    "amount": 200,
+    "currency": "USD"
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/message.result.json",
+  "title": "result body",
+  "description": "Section 6.2. The answerer echoes the intent and carries its Section 8 response.",
+  "type": "object",
+  "properties": {
+    "intent": {
+      "$ref": "common.json#/$defs/intent_name"
+    },
+    "response": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "intent",
+    "response"
+  ],
+  "allOf": [
+    {
+      "description": "Section 8. The availability response shape.",
+      "if": {
+        "properties": {
+          "intent": {
+            "const": "availability"
+          }
+        },
+        "required": [
+          "intent"
+        ]
+      },
+      "then": {
+        "properties": {
+          "response": {
+            "$ref": "intent.availability.response.json"
+          }
+        }
+      }
+    },
+    {
+      "description": "Section 8. The book response shape.",
+      "if": {
+        "properties": {
+          "intent": {
+            "const": "book"
+          }
+        },
+        "required": [
+          "intent"
+        ]
+      },
+      "then": {
+        "properties": {
+          "response": {
+            "$ref": "intent.book.response.json"
+          }
+        }
+      }
+    },
+    {
+      "description": "Section 8. The reschedule response shape.",
+      "if": {
+        "properties": {
+          "intent": {
+            "const": "reschedule"
+          }
+        },
+        "required": [
+          "intent"
+        ]
+      },
+      "then": {
+        "properties": {
+          "response": {
+            "$ref": "intent.reschedule.response.json"
+          }
+        }
+      }
+    },
+    {
+      "description": "Section 8. The cancel response shape.",
+      "if": {
+        "properties": {
+          "intent": {
+            "const": "cancel"
+          }
+        },
+        "required": [
+          "intent"
+        ]
+      },
+      "then": {
+        "properties": {
+          "response": {
+            "$ref": "intent.cancel.response.json"
+          }
+        }
+      }
+    },
+    {
+      "description": "Section 8. The quote response shape.",
+      "if": {
+        "properties": {
+          "intent": {
+            "const": "quote"
+          }
+        },
+        "required": [
+          "intent"
+        ]
+      },
+      "then": {
+        "properties": {
+          "response": {
+            "$ref": "intent.quote.response.json"
+          }
+        }
+      }
+    },
+    {
+      "description": "Section 8. The message response shape.",
+      "if": {
+        "properties": {
+          "intent": {
+            "const": "message"
+          }
+        },
+        "required": [
+          "intent"
+        ]
+      },
+      "then": {
+        "properties": {
+          "response": {
+            "$ref": "intent.message.response.json"
+          }
+        }
+      }
+    },
+    {
+      "description": "Section 8. The handoff response shape.",
+      "if": {
+        "properties": {
+          "intent": {
+            "const": "handoff"
+          }
+        },
+        "required": [
+          "intent"
+        ]
+      },
+      "then": {
+        "properties": {
+          "response": {
+            "$ref": "intent.handoff.response.json"
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": true
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/intent.reschedule.request.json",
+  "title": "reschedule request",
+  "description": "Section 8.3. Requires confirmation and a receipt.",
+  "type": "object",
+  "properties": {
+    "reference": {
+      "$ref": "common.json#/$defs/id"
+    },
+    "to": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "$ref": "common.json#/$defs/id"
+        },
+        "start": {
+          "$ref": "common.json#/$defs/timestamp"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "slot"
+          ],
+          "not": {
+            "required": [
+              "start"
+            ]
+          }
+        },
+        {
+          "required": [
+            "start"
+          ],
+          "not": {
+            "required": [
+              "slot"
+            ]
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "note": {
+      "$ref": "common.json#/$defs/free_text"
+    }
+  },
+  "required": [
+    "reference",
+    "to"
+  ],
+  "additionalProperties": true
+}

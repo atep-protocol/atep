@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/mandate.json",
+  "title": "ATEP mandate",
+  "description": "Section 7.2. A signed, per-transaction authorization for a binding action. It covers exactly one action with exactly those terms.",
+  "type": "object",
+  "properties": {
+    "for": {
+      "description": "Section 7.2. cancel, reschedule, or quote, or the name of an extension intent that declares that it requires a mandate.",
+      "anyOf": [
+        { "type": "string", "enum": ["cancel", "reschedule", "quote"] },
+        { "$ref": "common.json#/$defs/extension_intent" }
+      ]
+    },
+    "reference": { "$ref": "common.json#/$defs/id" },
+    "terms": { "$ref": "#/$defs/terms" },
+    "issued": { "$ref": "common.json#/$defs/timestamp" },
+    "expires": {
+      "description": "Section 7.2. At most one hour after issued.",
+      "$ref": "common.json#/$defs/timestamp"
+    },
+    "credential": {
+      "description": "Section 7.2. Issued after the terms were shown to the principal.",
+      "$ref": "common.json#/$defs/jws"
+    }
+  },
+  "required": ["for", "reference", "terms", "issued", "expires", "credential"],
+  "x-atep-max-lifetime": {
+    "description": "Section 7.2. A mandate expires in at most one hour.",
+    "from": "issued",
+    "to": "expires",
+    "maxSeconds": 3600
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "terms": {
+      "description": "Section 7.2. The exact terms the answerer stated in mandate_required.",
+      "type": "object",
+      "properties": {
+        "fee": { "$ref": "common.json#/$defs/money" },
+        "text": { "$ref": "common.json#/$defs/free_text" }
+      },
+      "required": ["text"],
+      "additionalProperties": true
+    }
+  }
+}

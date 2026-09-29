@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/registry.verification.json",
+  "title": "registry verification response",
+  "description": "Section 4.4. GET /v1/verifications/{id}.",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "verified",
+        "failed"
+      ]
+    },
+    "reason": {
+      "$ref": "common.json#/$defs/free_text"
+    },
+    "sig": {
+      "description": "Section 4.4. A registry MUST serve responses signed per Section 3 with keys published in its own card.",
+      "$ref": "common.json#/$defs/jws"
+    }
+  },
+  "required": [
+    "status",
+    "sig"
+  ],
+  "allOf": [
+    {
+      "description": "Section 4.4. A failed verification says why.",
+      "if": {
+        "properties": {
+          "status": {
+            "const": "failed"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "reason"
+        ]
+      }
+    }
+  ],
+  "additionalProperties": true
+}

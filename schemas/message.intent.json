@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/message.intent.json",
+  "title": "intent body",
+  "description": "Section 6.2. The caller names an intent and carries its Section 8 request. An extension intent (Section 8.8) carries a vendor-defined request object.",
+  "type": "object",
+  "properties": {
+    "intent": {
+      "$ref": "common.json#/$defs/intent_name"
+    },
+    "request": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "intent",
+    "request"
+  ],
+  "allOf": [
+    {
+      "description": "Section 8. The availability request shape.",
+      "if": {
+        "properties": {
+          "intent": {
+            "const": "availability"
+          }
+        },
+        "required": [
+          "intent"
+        ]
+      },
+      "then": {
+        "properties": {
+          "request": {
+            "$ref": "intent.availability.request.json"
+          }
+        }
+      }
+    },
+    {
+      "description": "Section 8. The book request shape.",
+      "if": {
+        "properties": {
+          "intent": {
+            "const": "book"
+          }
+        },
+        "required": [
+          "intent"
+        ]
+      },
+      "then": {
+        "properties": {
+          "request": {
+            "$ref": "intent.book.request.json"
+          }
+        }
+      }
+    },
+    {
+      "description": "Section 8. The reschedule request shape.",
+      "if": {
+        "properties": {
+          "intent": {
+            "const": "reschedule"
+          }
+        },
+        "required": [
+          "intent"
+        ]
+      },
+      "then": {
+        "properties": {
+          "request": {
+            "$ref": "intent.reschedule.request.json"
+          }
+        }
+      }
+    },
+    {
+      "description": "Section 8. The cancel request shape.",
+      "if": {
+        "properties": {
+          "intent": {
+            "const": "cancel"
+          }
+        },
+        "required": [
+          "intent"
+        ]
+      },
+      "then": {
+        "properties": {
+          "request": {
+            "$ref": "intent.cancel.request.json"
+          }
+        }
+      }
+    },
+    {
+      "description": "Section 8. The quote request shape.",
+      "if": {
+        "properties": {
+          "intent": {
+            "const": "quote"
+          }
+        },
+        "required": [
+          "intent"
+        ]
+      },
+      "then": {
+        "properties": {
+          "request": {
+            "$ref": "intent.quote.request.json"
+          }
+        }
+      }
+    },
+    {
+      "description": "Section 8. The message request shape.",
+      "if": {
+        "properties": {
+          "intent": {
+            "const": "message"
+          }
+        },
+        "required": [
+          "intent"
+        ]
+      },
+      "then": {
+        "properties": {
+          "request": {
+            "$ref": "intent.message.request.json"
+          }
+        }
+      }
+    },
+    {
+      "description": "Section 8. The handoff request shape.",
+      "if": {
+        "properties": {
+          "intent": {
+            "const": "handoff"
+          }
+        },
+        "required": [
+          "intent"
+        ]
+      },
+      "then": {
+        "properties": {
+          "request": {
+            "$ref": "intent.handoff.request.json"
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": true
+}

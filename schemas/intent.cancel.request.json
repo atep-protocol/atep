@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/intent.cancel.request.json",
+  "title": "cancel request",
+  "description": "Section 8.4. Always requires a mandate; a cancellation is never reversible by the agent. Requires confirmation and a receipt.",
+  "type": "object",
+  "properties": {
+    "reference": {
+      "$ref": "common.json#/$defs/id"
+    },
+    "reason": {
+      "$ref": "common.json#/$defs/free_text"
+    }
+  },
+  "required": [
+    "reference"
+  ],
+  "additionalProperties": true
+}

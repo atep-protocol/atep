@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/message.hello_ack.json",
+  "title": "hello_ack body",
+  "description": "Section 6.2. The answerer's reply to hello; carries the session id and the answerer's challenge.",
+  "type": "object",
+  "properties": {
+    "session": { "$ref": "common.json#/$defs/id" },
+    "challenge": { "$ref": "common.json#/$defs/challenge" },
+    "records": { "type": "boolean" },
+    "accepts": {
+      "type": "array",
+      "items": { "$ref": "common.json#/$defs/intent_name" }
+    },
+    "healthcare": { "type": "boolean" }
+  },
+  "required": ["session", "challenge", "records", "accepts", "healthcare"],
+  "additionalProperties": true
+}

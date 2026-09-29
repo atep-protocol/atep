@@ -1,0 +1,8 @@
+{
+  "outcome": "cancelled",
+  "fee": {
+    "amount": 50,
+    "currency": "USD"
+  },
+  "text": "Cancelled. A $50 late cancellation fee applies."
+}

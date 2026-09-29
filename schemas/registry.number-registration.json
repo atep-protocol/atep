@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/registry.number-registration.json",
+  "title": "registry number registration request",
+  "description": "Section 4.4. The body of POST /v1/numbers.",
+  "type": "object",
+  "properties": {
+    "number": {
+      "$ref": "common.json#/$defs/e164"
+    },
+    "card": {
+      "$ref": "common.json#/$defs/https_url"
+    }
+  },
+  "required": [
+    "number",
+    "card"
+  ],
+  "additionalProperties": true
+}

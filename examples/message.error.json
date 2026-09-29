@@ -1,0 +1,13 @@
+{
+  "code": "mandate_required",
+  "detail": {
+    "text": "Cancellation within 24 hours carries a $50 fee.",
+    "terms": {
+      "fee": {
+        "amount": 50,
+        "currency": "USD"
+      },
+      "text": "Cancellation within 24 hours carries a $50 fee."
+    }
+  }
+}

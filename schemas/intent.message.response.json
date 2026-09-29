@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/intent.message.response.json",
+  "title": "message response",
+  "description": "Section 8.6. Receipt.",
+  "type": "object",
+  "properties": {
+    "outcome": {
+      "const": "message_taken"
+    },
+    "reference": {
+      "$ref": "common.json#/$defs/id"
+    },
+    "expected_response": {
+      "$ref": "common.json#/$defs/free_text"
+    }
+  },
+  "required": [
+    "outcome",
+    "reference"
+  ],
+  "additionalProperties": true
+}

@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/message.delegation.json",
+  "title": "delegation body",
+  "description": "Section 6.2 and Section 7.1. The caller's first message after bound.",
+  "$ref": "delegation.json"
+}

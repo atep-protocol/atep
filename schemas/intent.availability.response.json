@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/intent.availability.response.json",
+  "title": "availability response",
+  "description": "Section 8.1.",
+  "type": "object",
+  "properties": {
+    "slots": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/slot"
+      }
+    },
+    "note": {
+      "$ref": "common.json#/$defs/free_text"
+    }
+  },
+  "required": [
+    "slots"
+  ],
+  "additionalProperties": true
+}

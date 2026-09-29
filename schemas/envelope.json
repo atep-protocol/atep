@@ -1,0 +1,355 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/envelope.json",
+  "title": "ATEP message envelope",
+  "description": "Section 6.1. Every ATEP message is one JSON object with this envelope. The body is discriminated on type.",
+  "type": "object",
+  "properties": {
+    "atep": {
+      "$ref": "common.json#/$defs/version"
+    },
+    "id": {
+      "description": "Section 6.1. A receiver MUST reject a message whose id it has seen before.",
+      "$ref": "common.json#/$defs/id"
+    },
+    "session": {
+      "$ref": "common.json#/$defs/id"
+    },
+    "ts": {
+      "description": "Section 6.1. A receiver MUST reject a message whose ts is more than 5 minutes from its clock.",
+      "$ref": "common.json#/$defs/timestamp"
+    },
+    "from": {
+      "description": "Section 6.1. The sending party's id.",
+      "$ref": "common.json#/$defs/id"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "hello",
+        "hello_ack",
+        "bind",
+        "bound",
+        "delegation",
+        "delegation_ack",
+        "mandate",
+        "intent",
+        "result",
+        "confirm",
+        "receipt",
+        "handoff",
+        "release",
+        "release_ack",
+        "fallback",
+        "working",
+        "error"
+      ]
+    },
+    "human_audible": {
+      "description": "Section 6.6. Every message carries it.",
+      "type": "boolean"
+    },
+    "body": {
+      "type": "object"
+    },
+    "sig": {
+      "description": "Section 3 and 6.1. Detached JWS over the JCS form of the envelope without sig.",
+      "$ref": "common.json#/$defs/jws"
+    }
+  },
+  "required": [
+    "atep",
+    "id",
+    "ts",
+    "from",
+    "type",
+    "human_audible",
+    "body",
+    "sig"
+  ],
+  "oneOf": [
+    {
+      "title": "hello",
+      "properties": {
+        "type": {
+          "const": "hello"
+        },
+        "body": {
+          "$ref": "message.hello.json"
+        }
+      },
+      "required": [
+        "type",
+        "body"
+      ],
+      "description": "Section 6.1. session is absent on hello.",
+      "not": {
+        "required": [
+          "session"
+        ]
+      }
+    },
+    {
+      "title": "hello_ack",
+      "properties": {
+        "type": {
+          "const": "hello_ack"
+        },
+        "body": {
+          "$ref": "message.hello_ack.json"
+        }
+      },
+      "required": [
+        "type",
+        "body",
+        "session"
+      ]
+    },
+    {
+      "title": "bind",
+      "properties": {
+        "type": {
+          "const": "bind"
+        },
+        "body": {
+          "$ref": "message.bind.json"
+        }
+      },
+      "required": [
+        "type",
+        "body",
+        "session"
+      ]
+    },
+    {
+      "title": "bound",
+      "properties": {
+        "type": {
+          "const": "bound"
+        },
+        "body": {
+          "$ref": "message.bound.json"
+        }
+      },
+      "required": [
+        "type",
+        "body",
+        "session"
+      ]
+    },
+    {
+      "title": "delegation",
+      "properties": {
+        "type": {
+          "const": "delegation"
+        },
+        "body": {
+          "$ref": "message.delegation.json"
+        }
+      },
+      "required": [
+        "type",
+        "body",
+        "session"
+      ]
+    },
+    {
+      "title": "delegation_ack",
+      "properties": {
+        "type": {
+          "const": "delegation_ack"
+        },
+        "body": {
+          "$ref": "message.delegation_ack.json"
+        }
+      },
+      "required": [
+        "type",
+        "body",
+        "session"
+      ]
+    },
+    {
+      "title": "mandate",
+      "properties": {
+        "type": {
+          "const": "mandate"
+        },
+        "body": {
+          "$ref": "message.mandate.json"
+        }
+      },
+      "required": [
+        "type",
+        "body",
+        "session"
+      ]
+    },
+    {
+      "title": "intent",
+      "properties": {
+        "type": {
+          "const": "intent"
+        },
+        "body": {
+          "$ref": "message.intent.json"
+        }
+      },
+      "required": [
+        "type",
+        "body",
+        "session"
+      ]
+    },
+    {
+      "title": "result",
+      "properties": {
+        "type": {
+          "const": "result"
+        },
+        "body": {
+          "$ref": "message.result.json"
+        }
+      },
+      "required": [
+        "type",
+        "body",
+        "session"
+      ]
+    },
+    {
+      "title": "confirm",
+      "properties": {
+        "type": {
+          "const": "confirm"
+        },
+        "body": {
+          "$ref": "message.confirm.json"
+        }
+      },
+      "required": [
+        "type",
+        "body",
+        "session"
+      ]
+    },
+    {
+      "title": "receipt",
+      "properties": {
+        "type": {
+          "const": "receipt"
+        },
+        "body": {
+          "$ref": "message.receipt.json"
+        }
+      },
+      "required": [
+        "type",
+        "body",
+        "session"
+      ]
+    },
+    {
+      "title": "handoff",
+      "properties": {
+        "type": {
+          "const": "handoff"
+        },
+        "body": {
+          "$ref": "message.handoff.json"
+        }
+      },
+      "required": [
+        "type",
+        "body",
+        "session"
+      ]
+    },
+    {
+      "title": "release",
+      "properties": {
+        "type": {
+          "const": "release"
+        },
+        "body": {
+          "$ref": "message.release.json"
+        }
+      },
+      "required": [
+        "type",
+        "body",
+        "session"
+      ]
+    },
+    {
+      "title": "release_ack",
+      "properties": {
+        "type": {
+          "const": "release_ack"
+        },
+        "body": {
+          "$ref": "message.release_ack.json"
+        }
+      },
+      "required": [
+        "type",
+        "body",
+        "session"
+      ]
+    },
+    {
+      "title": "fallback",
+      "properties": {
+        "type": {
+          "const": "fallback"
+        },
+        "body": {
+          "$ref": "message.fallback.json"
+        }
+      },
+      "required": [
+        "type",
+        "body",
+        "session"
+      ]
+    },
+    {
+      "title": "working",
+      "properties": {
+        "type": {
+          "const": "working"
+        },
+        "body": {
+          "$ref": "message.working.json"
+        }
+      },
+      "required": [
+        "type",
+        "body",
+        "session"
+      ]
+    },
+    {
+      "title": "error",
+      "properties": {
+        "type": {
+          "const": "error"
+        },
+        "body": {
+          "$ref": "message.error.json"
+        }
+      },
+      "required": [
+        "type",
+        "body",
+        "session"
+      ]
+    }
+  ],
+  "x-atep-session-matches-body": {
+    "description": "Section 6.1. A message whose envelope session disagrees with a session in its body is rejected with malformed.",
+    "envelope": "session",
+    "body": "body"
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/message.fallback.json",
+  "title": "fallback body",
+  "description": "Section 6.2 and Section 5.5. Continue the task in plain voice.",
+  "type": "object",
+  "properties": {
+    "reason": { "$ref": "common.json#/$defs/free_text" }
+  },
+  "required": ["reason"],
+  "additionalProperties": true
+}

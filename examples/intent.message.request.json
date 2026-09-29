@@ -1,0 +1,14 @@
+{
+  "to": {
+    "role": "the front desk"
+  },
+  "text": "Please call back about moving the October 6 appointment.",
+  "callback": {
+    "number": "+17755551234",
+    "window": {
+      "start": "2026-09-24T09:00:00-04:00",
+      "end": "2026-09-24T17:00:00-04:00"
+    }
+  },
+  "urgency": "routine"
+}

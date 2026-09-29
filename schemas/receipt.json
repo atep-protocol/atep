@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/receipt.json",
+  "title": "ATEP receipt",
+  "description": "Section 7.5. Produced for every state-changing outcome and for every message and handoff. Both sides store it.",
+  "type": "object",
+  "properties": {
+    "session": { "$ref": "common.json#/$defs/id" },
+    "intent": { "$ref": "common.json#/$defs/intent_name" },
+    "outcome": {
+      "type": "string",
+      "enum": [
+        "booked",
+        "rescheduled",
+        "cancelled",
+        "not_found",
+        "quoted",
+        "quote_accepted",
+        "message_taken",
+        "handed_off",
+        "declined",
+        "not_available"
+      ]
+    },
+    "outcome_channel": {
+      "description": "Section 5.5 and 7.5. A voice-completed task produces a receipt with outcome_channel \"voice\".",
+      "type": "string",
+      "enum": ["atep", "voice"]
+    },
+    "reference": { "$ref": "common.json#/$defs/id" },
+    "summary": {
+      "description": "Section 6.4 and 7.3. The read-back text both sides accepted.",
+      "$ref": "common.json#/$defs/free_text"
+    },
+    "details": {
+      "description": "Section 7.5 and Section 9. For a healthcare session, limited to service, time, provider, location, and instructions.",
+      "type": "object",
+      "additionalProperties": true
+    },
+    "principal": { "$ref": "common.json#/$defs/principal_ref" },
+    "party": { "$ref": "common.json#/$defs/party_ref" },
+    "delegation": {
+      "description": "Section 7.5. A digest of the delegation the session ran under.",
+      "$ref": "common.json#/$defs/digest"
+    },
+    "mandate": {
+      "description": "Section 7.5. A digest of the mandate, or null when the action needed none.",
+      "anyOf": [{ "$ref": "common.json#/$defs/digest" }, { "type": "null" }]
+    },
+    "disclosures": {
+      "description": "Section 7.5. The hello sentences as spoken. A closed set of legs; the member of a side that never spoke an ATEP hello is null.",
+      "type": "object",
+      "properties": {
+        "caller": { "$ref": "#/$defs/nullable_free_text" },
+        "answerer": { "$ref": "#/$defs/nullable_free_text" }
+      },
+      "required": ["caller", "answerer"],
+      "additionalProperties": false
+    },
+    "recorded": {
+      "description": "Section 7.5. Who recorded. The member of a side that never spoke an ATEP hello is null.",
+      "type": "object",
+      "properties": {
+        "caller": { "type": ["boolean", "null"] },
+        "answerer": { "type": ["boolean", "null"] }
+      },
+      "required": ["caller", "answerer"],
+      "additionalProperties": false
+    },
+    "machine_only": {
+      "description": "Section 6.6. True when every message after bound from both sides carried human_audible false.",
+      "type": "boolean"
+    },
+    "log_hash": {
+      "description": "Section 7.5. SHA-256 over the JCS form of the array of all session messages in order.",
+      "$ref": "common.json#/$defs/digest"
+    },
+    "issued": { "$ref": "common.json#/$defs/timestamp" },
+    "signatures": {
+      "description": "Section 7.5. Each side signs the receipt without the other's signature. The member of a side that never signed is null; at least one side signs.",
+      "type": "object",
+      "properties": {
+        "caller": { "$ref": "#/$defs/nullable_jws" },
+        "answerer": { "$ref": "#/$defs/nullable_jws" }
+      },
+      "required": ["caller", "answerer"],
+      "not": {
+        "properties": {
+          "caller": { "type": "null" },
+          "answerer": { "type": "null" }
+        },
+        "required": ["caller", "answerer"]
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "session",
+    "intent",
+    "outcome",
+    "outcome_channel",
+    "summary",
+    "principal",
+    "party",
+    "delegation",
+    "disclosures",
+    "recorded",
+    "machine_only",
+    "log_hash",
+    "issued",
+    "signatures"
+  ],
+  "allOf": [
+    {
+      "description": "Section 8.7. A handoff receipt carries details { kind, connected, waited_seconds }.",
+      "if": { "properties": { "outcome": { "const": "handed_off" } }, "required": ["outcome"] },
+      "then": {
+        "properties": {
+          "details": {
+            "type": "object",
+            "properties": {
+              "kind": { "type": "string", "enum": ["join_principal", "need_human"] },
+              "connected": { "type": "boolean" },
+              "waited_seconds": { "type": "number", "minimum": 0 }
+            },
+            "required": ["kind", "connected", "waited_seconds"]
+          }
+        },
+        "required": ["details"]
+      }
+    }
+  ],
+  "additionalProperties": true,
+  "$defs": {
+    "nullable_free_text": {
+      "anyOf": [{ "$ref": "common.json#/$defs/free_text" }, { "type": "null" }]
+    },
+    "nullable_jws": {
+      "anyOf": [{ "$ref": "common.json#/$defs/jws" }, { "type": "null" }]
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/intent.message.request.json",
+  "title": "message request",
+  "description": "Section 8.6. urgency MUST be routine. ATEP MUST NOT be used for emergencies or anything where minutes matter.",
+  "type": "object",
+  "properties": {
+    "to": {
+      "description": "Section 8.6. A person or a role at the business, optional.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "role": {
+          "type": "string",
+          "maxLength": 500
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "name"
+          ]
+        },
+        {
+          "required": [
+            "role"
+          ]
+        }
+      ],
+      "additionalProperties": true
+    },
+    "text": {
+      "$ref": "common.json#/$defs/free_text"
+    },
+    "callback": {
+      "$ref": "common.json#/$defs/callback"
+    },
+    "urgency": {
+      "const": "routine"
+    }
+  },
+  "required": [
+    "text",
+    "callback",
+    "urgency"
+  ],
+  "additionalProperties": true
+}

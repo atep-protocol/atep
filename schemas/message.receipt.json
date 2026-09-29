@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/message.receipt.json",
+  "title": "receipt body",
+  "description": "Section 6.2 and Section 7.5.",
+  "$ref": "receipt.json"
+}

@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/intent.quote.response.json",
+  "title": "quote response",
+  "description": "Section 8.5. A quote request answers quoted | needs_human | declined; an acceptance answers quote_accepted | declined with the reference. Receipt on acceptance.",
+  "type": "object",
+  "properties": {
+    "outcome": {
+      "type": "string",
+      "enum": [
+        "quoted",
+        "quote_accepted",
+        "needs_human",
+        "declined"
+      ]
+    },
+    "price": {
+      "$ref": "common.json#/$defs/money"
+    },
+    "includes": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/free_text"
+      }
+    },
+    "excludes": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/free_text"
+      }
+    },
+    "valid_until": {
+      "$ref": "common.json#/$defs/timestamp"
+    },
+    "terms": {
+      "$ref": "common.json#/$defs/free_text"
+    },
+    "reference": {
+      "$ref": "common.json#/$defs/id"
+    }
+  },
+  "required": [
+    "outcome"
+  ],
+  "allOf": [
+    {
+      "description": "Section 8.5. A quote carries its price, validity, and reference.",
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "quoted"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "required": [
+          "price",
+          "valid_until",
+          "reference"
+        ]
+      }
+    },
+    {
+      "description": "Section 8.5. An accepted quote carries the reference it accepted.",
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "quote_accepted"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "required": [
+          "reference"
+        ]
+      }
+    }
+  ],
+  "additionalProperties": true
+}

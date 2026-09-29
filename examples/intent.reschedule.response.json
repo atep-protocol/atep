@@ -1,0 +1,19 @@
+{
+  "outcome": "rescheduled",
+  "reference": "4471",
+  "start": "2026-10-08T09:30:00-04:00",
+  "duration_minutes": 30,
+  "provider": "Dr. Alvarez",
+  "fee": {
+    "amount": 0,
+    "currency": "USD"
+  },
+  "cancellation_terms": {
+    "text": "Cancellation within 24 hours carries a $50 fee.",
+    "fee": {
+      "amount": 50,
+      "currency": "USD"
+    },
+    "cutoff_hours": 24
+  }
+}

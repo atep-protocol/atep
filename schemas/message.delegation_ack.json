@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/message.delegation_ack.json",
+  "title": "delegation_ack body",
+  "description": "Section 6.2 and Section 7.1. accepted: false ends the session with declined.",
+  "type": "object",
+  "properties": {
+    "accepted": { "type": "boolean" },
+    "reason": { "$ref": "common.json#/$defs/free_text" }
+  },
+  "required": ["accepted"],
+  "allOf": [
+    {
+      "description": "Section 7.1. A refusal says why.",
+      "if": { "properties": { "accepted": { "const": false } }, "required": ["accepted"] },
+      "then": { "required": ["reason"] }
+    }
+  ],
+  "additionalProperties": true
+}

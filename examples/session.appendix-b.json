@@ -1,0 +1,344 @@
+[
+  {
+    "atep": "1.0",
+    "id": "m_01J8QK0001",
+    "ts": "2026-09-23T14:30:02-04:00",
+    "from": "urn:atep:party:5c9f1d2e-7a41-4d0b-8e33-6b2a7c8d9e10",
+    "type": "hello",
+    "human_audible": false,
+    "body": {
+      "call_ref": {
+        "from": "+17755550000",
+        "to": "+14632513583",
+        "connected_at": "2026-09-23T14:30:00-04:00",
+        "nonce": "n_7f3a9c21d8b04e6a"
+      },
+      "caller_card": "https://lydoh.com/.well-known/atep.json",
+      "challenge": "7204",
+      "records": false,
+      "language": "en",
+      "intents": [
+        "availability",
+        "book"
+      ]
+    },
+    "sig": "eyJhbGciOiJFZERTQSIsImtpZCI6IjIwMjYtMDgifQ..Y2FsbGVyLXNpZ25hdHVyZS1wbGFjZWhvbGRlcg"
+  },
+  {
+    "atep": "1.0",
+    "id": "m_01J8QK0002",
+    "session": "s_01J8QK3ZP7W9V2X4Y6B8C0D2E4",
+    "ts": "2026-09-23T14:30:03-04:00",
+    "from": "urn:atep:party:9f2c0e4a-6e6d-4a2e-9b1a-3f4b0b9a1c77",
+    "type": "hello_ack",
+    "human_audible": false,
+    "body": {
+      "session": "s_01J8QK3ZP7W9V2X4Y6B8C0D2E4",
+      "challenge": "4831",
+      "records": true,
+      "accepts": [
+        "availability",
+        "book",
+        "reschedule",
+        "cancel",
+        "message",
+        "handoff"
+      ],
+      "healthcare": true
+    },
+    "sig": "eyJhbGciOiJFZERTQSIsImtpZCI6IjIwMjYtMDkifQ..YW5zd2VyZXItc2lnbmF0dXJlLXBsYWNlaG9sZGVy"
+  },
+  {
+    "atep": "1.0",
+    "id": "m_01J8QK0003",
+    "session": "s_01J8QK3ZP7W9V2X4Y6B8C0D2E4",
+    "ts": "2026-09-23T14:30:08-04:00",
+    "from": "urn:atep:party:5c9f1d2e-7a41-4d0b-8e33-6b2a7c8d9e10",
+    "type": "bind",
+    "human_audible": false,
+    "body": {
+      "heard": "4831"
+    },
+    "sig": "eyJhbGciOiJFZERTQSIsImtpZCI6IjIwMjYtMDgifQ..Y2FsbGVyLXNpZ25hdHVyZS1wbGFjZWhvbGRlcg"
+  },
+  {
+    "atep": "1.0",
+    "id": "m_01J8QK0004",
+    "session": "s_01J8QK3ZP7W9V2X4Y6B8C0D2E4",
+    "ts": "2026-09-23T14:30:09-04:00",
+    "from": "urn:atep:party:9f2c0e4a-6e6d-4a2e-9b1a-3f4b0b9a1c77",
+    "type": "bound",
+    "human_audible": false,
+    "body": {
+      "bound_at": "2026-09-23T14:30:09-04:00"
+    },
+    "sig": "eyJhbGciOiJFZERTQSIsImtpZCI6IjIwMjYtMDkifQ..YW5zd2VyZXItc2lnbmF0dXJlLXBsYWNlaG9sZGVy"
+  },
+  {
+    "atep": "1.0",
+    "id": "m_01J8QK0005",
+    "session": "s_01J8QK3ZP7W9V2X4Y6B8C0D2E4",
+    "ts": "2026-09-23T14:30:15-04:00",
+    "from": "urn:atep:party:5c9f1d2e-7a41-4d0b-8e33-6b2a7c8d9e10",
+    "type": "release",
+    "human_audible": false,
+    "body": {},
+    "sig": "eyJhbGciOiJFZERTQSIsImtpZCI6IjIwMjYtMDgifQ..Y2FsbGVyLXNpZ25hdHVyZS1wbGFjZWhvbGRlcg"
+  },
+  {
+    "atep": "1.0",
+    "id": "m_01J8QK0006",
+    "session": "s_01J8QK3ZP7W9V2X4Y6B8C0D2E4",
+    "ts": "2026-09-23T14:30:16-04:00",
+    "from": "urn:atep:party:9f2c0e4a-6e6d-4a2e-9b1a-3f4b0b9a1c77",
+    "type": "release_ack",
+    "human_audible": false,
+    "body": {},
+    "sig": "eyJhbGciOiJFZERTQSIsImtpZCI6IjIwMjYtMDkifQ..YW5zd2VyZXItc2lnbmF0dXJlLXBsYWNlaG9sZGVy"
+  },
+  {
+    "atep": "1.0",
+    "id": "m_01J8QK0007",
+    "session": "s_01J8QK3ZP7W9V2X4Y6B8C0D2E4",
+    "ts": "2026-09-23T14:30:19-04:00",
+    "from": "urn:atep:party:5c9f1d2e-7a41-4d0b-8e33-6b2a7c8d9e10",
+    "type": "delegation",
+    "human_audible": false,
+    "body": {
+      "principal": {
+        "id": "urn:atep:principal:c1b6a2d4-83e5-4f17-9a0c-2d5e6f708192",
+        "name": "Sohel S.",
+        "contact": "+17755551234",
+        "platform": "https://lydoh.com/.well-known/atep.json"
+      },
+      "scope": [
+        "availability",
+        "book",
+        "message",
+        "handoff"
+      ],
+      "caps": {
+        "max_spend": {
+          "amount": 200,
+          "currency": "USD"
+        },
+        "date_window": {
+          "start": "2026-10-01",
+          "end": "2026-10-31"
+        },
+        "max_bookings": 1
+      },
+      "identity_verification": "none",
+      "issued": "2026-09-23T14:29:00-04:00",
+      "expires": "2026-09-23T15:29:00-04:00",
+      "revocation_url": "https://lydoh.com/atep/v1/delegations/d_01J8QK3ZP7W9V2X4Y6B8C0D2E4",
+      "credential": "eyJhbGciOiJFZERTQSIsImtpZCI6IjIwMjYtMDgifQ..ZGVsZWdhdGlvbi1jcmVkZW50aWFsLXBsYWNlaG9sZGVy"
+    },
+    "sig": "eyJhbGciOiJFZERTQSIsImtpZCI6IjIwMjYtMDgifQ..Y2FsbGVyLXNpZ25hdHVyZS1wbGFjZWhvbGRlcg"
+  },
+  {
+    "atep": "1.0",
+    "id": "m_01J8QK0008",
+    "session": "s_01J8QK3ZP7W9V2X4Y6B8C0D2E4",
+    "ts": "2026-09-23T14:30:21-04:00",
+    "from": "urn:atep:party:9f2c0e4a-6e6d-4a2e-9b1a-3f4b0b9a1c77",
+    "type": "delegation_ack",
+    "human_audible": false,
+    "body": {
+      "accepted": true
+    },
+    "sig": "eyJhbGciOiJFZERTQSIsImtpZCI6IjIwMjYtMDkifQ..YW5zd2VyZXItc2lnbmF0dXJlLXBsYWNlaG9sZGVy"
+  },
+  {
+    "atep": "1.0",
+    "id": "m_01J8QK0009",
+    "session": "s_01J8QK3ZP7W9V2X4Y6B8C0D2E4",
+    "ts": "2026-09-23T14:30:24-04:00",
+    "from": "urn:atep:party:5c9f1d2e-7a41-4d0b-8e33-6b2a7c8d9e10",
+    "type": "intent",
+    "human_audible": false,
+    "body": {
+      "intent": "availability",
+      "request": {
+        "service": "new-patient",
+        "window": {
+          "start": "2026-10-01T00:00:00-04:00",
+          "end": "2026-10-31T23:59:59-04:00"
+        },
+        "preferences": {
+          "times_of_day": [
+            "morning"
+          ],
+          "days": [
+            "mon",
+            "tue",
+            "wed",
+            "thu",
+            "fri"
+          ]
+        },
+        "count": 5
+      }
+    },
+    "sig": "eyJhbGciOiJFZERTQSIsImtpZCI6IjIwMjYtMDgifQ..Y2FsbGVyLXNpZ25hdHVyZS1wbGFjZWhvbGRlcg"
+  },
+  {
+    "atep": "1.0",
+    "id": "m_01J8QK0010",
+    "session": "s_01J8QK3ZP7W9V2X4Y6B8C0D2E4",
+    "ts": "2026-09-23T14:30:26-04:00",
+    "from": "urn:atep:party:9f2c0e4a-6e6d-4a2e-9b1a-3f4b0b9a1c77",
+    "type": "result",
+    "human_audible": false,
+    "body": {
+      "intent": "availability",
+      "response": {
+        "slots": [
+          {
+            "id": "sl_01J8A",
+            "start": "2026-10-06T09:00:00-04:00",
+            "duration_minutes": 30,
+            "provider": "Dr. Alvarez"
+          },
+          {
+            "id": "sl_01J8B",
+            "start": "2026-10-08T09:30:00-04:00",
+            "duration_minutes": 30,
+            "provider": "Dr. Alvarez"
+          }
+        ],
+        "note": "Mornings fill quickly in October."
+      }
+    },
+    "sig": "eyJhbGciOiJFZERTQSIsImtpZCI6IjIwMjYtMDkifQ..YW5zd2VyZXItc2lnbmF0dXJlLXBsYWNlaG9sZGVy"
+  },
+  {
+    "atep": "1.0",
+    "id": "m_01J8QK0011",
+    "session": "s_01J8QK3ZP7W9V2X4Y6B8C0D2E4",
+    "ts": "2026-09-23T14:30:31-04:00",
+    "from": "urn:atep:party:5c9f1d2e-7a41-4d0b-8e33-6b2a7c8d9e10",
+    "type": "intent",
+    "human_audible": false,
+    "body": {
+      "intent": "book",
+      "request": {
+        "service": "new-patient",
+        "slot": "sl_01J8A",
+        "for": {
+          "name": "Sohel S.",
+          "contact": "+17755551234"
+        }
+      }
+    },
+    "sig": "eyJhbGciOiJFZERTQSIsImtpZCI6IjIwMjYtMDgifQ..Y2FsbGVyLXNpZ25hdHVyZS1wbGFjZWhvbGRlcg"
+  },
+  {
+    "atep": "1.0",
+    "id": "m_01J8QK0012",
+    "session": "s_01J8QK3ZP7W9V2X4Y6B8C0D2E4",
+    "ts": "2026-09-23T14:30:34-04:00",
+    "from": "urn:atep:party:9f2c0e4a-6e6d-4a2e-9b1a-3f4b0b9a1c77",
+    "type": "result",
+    "human_audible": false,
+    "body": {
+      "intent": "book",
+      "response": {
+        "outcome": "booked",
+        "reference": "4471",
+        "start": "2026-10-06T09:00:00-04:00",
+        "duration_minutes": 30,
+        "provider": "Dr. Alvarez",
+        "cancellation_terms": {
+          "text": "Cancellation within 24 hours carries a $50 fee.",
+          "fee": {
+            "amount": 50,
+            "currency": "USD"
+          },
+          "cutoff_hours": 24
+        }
+      }
+    },
+    "sig": "eyJhbGciOiJFZERTQSIsImtpZCI6IjIwMjYtMDkifQ..YW5zd2VyZXItc2lnbmF0dXJlLXBsYWNlaG9sZGVy"
+  },
+  {
+    "atep": "1.0",
+    "id": "m_01J8QK0013",
+    "session": "s_01J8QK3ZP7W9V2X4Y6B8C0D2E4",
+    "ts": "2026-09-23T14:30:36-04:00",
+    "from": "urn:atep:party:9f2c0e4a-6e6d-4a2e-9b1a-3f4b0b9a1c77",
+    "type": "confirm",
+    "human_audible": false,
+    "body": {
+      "intent": "book",
+      "summary": "Booked: new patient visit, Tuesday October 6 at 9:00 AM, for Sohel S., reference 4471.",
+      "accept": true
+    },
+    "sig": "eyJhbGciOiJFZERTQSIsImtpZCI6IjIwMjYtMDkifQ..YW5zd2VyZXItc2lnbmF0dXJlLXBsYWNlaG9sZGVy"
+  },
+  {
+    "atep": "1.0",
+    "id": "m_01J8QK0014",
+    "session": "s_01J8QK3ZP7W9V2X4Y6B8C0D2E4",
+    "ts": "2026-09-23T14:30:38-04:00",
+    "from": "urn:atep:party:5c9f1d2e-7a41-4d0b-8e33-6b2a7c8d9e10",
+    "type": "confirm",
+    "human_audible": false,
+    "body": {
+      "intent": "book",
+      "summary": "Booked: new patient visit, Tuesday October 6 at 9:00 AM, for Sohel S., reference 4471.",
+      "accept": true
+    },
+    "sig": "eyJhbGciOiJFZERTQSIsImtpZCI6IjIwMjYtMDgifQ..Y2FsbGVyLXNpZ25hdHVyZS1wbGFjZWhvbGRlcg"
+  },
+  {
+    "atep": "1.0",
+    "id": "m_01J8QK0015",
+    "session": "s_01J8QK3ZP7W9V2X4Y6B8C0D2E4",
+    "ts": "2026-09-23T14:30:41-04:00",
+    "from": "urn:atep:party:5c9f1d2e-7a41-4d0b-8e33-6b2a7c8d9e10",
+    "type": "receipt",
+    "human_audible": false,
+    "body": {
+      "session": "s_01J8QK3ZP7W9V2X4Y6B8C0D2E4",
+      "intent": "book",
+      "outcome": "booked",
+      "outcome_channel": "atep",
+      "reference": "4471",
+      "summary": "Booked: new patient visit, Tuesday October 6 at 9:00 AM, for Sohel S., reference 4471.",
+      "details": {
+        "service": "new-patient",
+        "start": "2026-10-06T09:00:00-04:00",
+        "duration_minutes": 30
+      },
+      "principal": {
+        "id": "urn:atep:principal:c1b6a2d4-83e5-4f17-9a0c-2d5e6f708192",
+        "name": "Sohel S.",
+        "platform": "https://lydoh.com/.well-known/atep.json"
+      },
+      "party": {
+        "id": "urn:atep:party:9f2c0e4a-6e6d-4a2e-9b1a-3f4b0b9a1c77",
+        "name": "Cedar Grove Family Medicine",
+        "card": "https://cedargrovefm.example/.well-known/atep.json"
+      },
+      "delegation": "sha256:1f8b2c3d4e5f60718293a4b5c6d7e8f90a1b2c3d4e5f60718293a4b5c6d7e8f9",
+      "mandate": null,
+      "disclosures": {
+        "caller": "This is an AI assistant calling for Sohel S. Callback 7 7 5 5 5 5 1 2 3 4. ATEP.",
+        "answerer": "This is Cedar Grove Family Medicine's AI assistant. This call is recorded. ATEP."
+      },
+      "recorded": {
+        "caller": false,
+        "answerer": true
+      },
+      "machine_only": true,
+      "log_hash": "sha256:a0b1c2d3e4f5061728394a5b6c7d8e9f00112233445566778899aabbccddeeff",
+      "issued": "2026-09-23T14:30:41-04:00",
+      "signatures": {
+        "caller": "eyJhbGciOiJFZERTQSIsImtpZCI6IjIwMjYtMDgifQ..Y2FsbGVyLXNpZ25hdHVyZS1wbGFjZWhvbGRlcg",
+        "answerer": "eyJhbGciOiJFZERTQSIsImtpZCI6IjIwMjYtMDkifQ..YW5zd2VyZXItc2lnbmF0dXJlLXBsYWNlaG9sZGVy"
+      }
+    },
+    "sig": "eyJhbGciOiJFZERTQSIsImtpZCI6IjIwMjYtMDgifQ..Y2FsbGVyLXNpZ25hdHVyZS1wbGFjZWhvbGRlcg"
+  }
+]

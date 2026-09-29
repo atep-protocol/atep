@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/message.bound.json",
+  "title": "bound body",
+  "description": "Section 6.2. Binding complete (Section 5.3).",
+  "type": "object",
+  "properties": {
+    "bound_at": { "$ref": "common.json#/$defs/timestamp" }
+  },
+  "required": ["bound_at"],
+  "additionalProperties": true
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/intent.cancel.response.json",
+  "title": "cancel response",
+  "description": "Section 8.4.",
+  "type": "object",
+  "properties": {
+    "outcome": {
+      "type": "string",
+      "enum": [
+        "cancelled",
+        "not_found",
+        "needs_human"
+      ]
+    },
+    "fee": {
+      "$ref": "common.json#/$defs/money"
+    },
+    "text": {
+      "$ref": "common.json#/$defs/free_text"
+    }
+  },
+  "required": [
+    "outcome"
+  ],
+  "additionalProperties": true
+}

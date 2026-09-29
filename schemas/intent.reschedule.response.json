@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/intent.reschedule.response.json",
+  "title": "reschedule response",
+  "description": "Section 8.3. As book, with outcome rescheduled | not_available | needs_human, plus fee if one applies. If fee is non-zero the answerer MUST first reply mandate_required.",
+  "type": "object",
+  "properties": {
+    "outcome": {
+      "type": "string",
+      "enum": [
+        "rescheduled",
+        "not_available",
+        "needs_human"
+      ]
+    },
+    "reference": {
+      "$ref": "common.json#/$defs/id"
+    },
+    "start": {
+      "$ref": "common.json#/$defs/timestamp"
+    },
+    "duration_minutes": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "provider": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "instructions": {
+      "description": "Section 8.2. What to bring, where to park.",
+      "$ref": "common.json#/$defs/free_text"
+    },
+    "cancellation_terms": {
+      "$ref": "common.json#/$defs/cancellation_terms"
+    },
+    "fee": {
+      "$ref": "common.json#/$defs/money"
+    }
+  },
+  "required": [
+    "outcome"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "rescheduled"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "required": [
+          "reference",
+          "start"
+        ]
+      }
+    }
+  ],
+  "additionalProperties": true
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/intent.availability.request.json",
+  "title": "availability request",
+  "description": "Section 8.1. Standing delegation suffices. No receipt.",
+  "type": "object",
+  "properties": {
+    "service": {
+      "$ref": "common.json#/$defs/service_ref"
+    },
+    "window": {
+      "$ref": "common.json#/$defs/window"
+    },
+    "preferences": {
+      "type": "object",
+      "properties": {
+        "times_of_day": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/time_of_day"
+          }
+        },
+        "days": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/day"
+          }
+        },
+        "provider": {
+          "type": "string",
+          "maxLength": 500
+        }
+      },
+      "additionalProperties": true
+    },
+    "count": {
+      "description": "Section 8.1. Max slots, default 5.",
+      "type": "integer",
+      "minimum": 1,
+      "default": 5
+    }
+  },
+  "required": [
+    "service",
+    "window"
+  ],
+  "additionalProperties": true
+}

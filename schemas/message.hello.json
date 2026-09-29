@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/message.hello.json",
+  "title": "hello body",
+  "description": "Section 6.2. Sent by the caller to the answerer's endpoint within 3 seconds of detecting the answerer's frame (Section 5.3).",
+  "type": "object",
+  "properties": {
+    "call_ref": {
+      "description": "Section 5.3. Both numbers, the connect time, and a nonce.",
+      "type": "object",
+      "properties": {
+        "from": { "$ref": "common.json#/$defs/e164" },
+        "to": { "$ref": "common.json#/$defs/e164" },
+        "connected_at": { "$ref": "common.json#/$defs/timestamp" },
+        "nonce": { "$ref": "common.json#/$defs/id" }
+      },
+      "required": ["from", "to", "connected_at", "nonce"],
+      "additionalProperties": true
+    },
+    "caller_card": { "$ref": "common.json#/$defs/https_url" },
+    "challenge": { "$ref": "common.json#/$defs/challenge" },
+    "records": { "type": "boolean" },
+    "language": { "$ref": "common.json#/$defs/language" },
+    "intents": {
+      "type": "array",
+      "items": { "$ref": "common.json#/$defs/intent_name" },
+      "minItems": 1
+    }
+  },
+  "required": ["call_ref", "caller_card", "challenge", "records", "language", "intents"],
+  "additionalProperties": true
+}

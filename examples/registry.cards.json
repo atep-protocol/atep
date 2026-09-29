@@ -1,0 +1,14 @@
+{
+  "party": "urn:atep:party:9f2c0e4a-6e6d-4a2e-9b1a-3f4b0b9a1c77",
+  "cards": [
+    {
+      "card": "https://cedargrovefm.example/.well-known/atep.json",
+      "numbers": [
+        "+14632513583"
+      ],
+      "verified_at": "2026-09-01T12:00:00Z",
+      "platform": "42"
+    }
+  ],
+  "sig": "eyJhbGciOiJFZERTQSIsImtpZCI6InJlZy0yMDI2LTA5In0..cmVnaXN0cnktc2lnbmF0dXJlLXBsYWNlaG9sZGVy"
+}

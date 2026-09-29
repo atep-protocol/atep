@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/intent.handoff.response.json",
+  "title": "handoff response",
+  "description": "Section 8.7. outcome: handed_off | not_available, kind, connected, waited_seconds, callback { number, window { start, end } } on not_available, and reason.",
+  "type": "object",
+  "properties": {
+    "outcome": {
+      "type": "string",
+      "enum": [
+        "handed_off",
+        "not_available"
+      ]
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "join_principal",
+        "need_human"
+      ]
+    },
+    "connected": {
+      "type": "boolean"
+    },
+    "waited_seconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "callback": {
+      "$ref": "common.json#/$defs/callback"
+    },
+    "reason": {
+      "$ref": "common.json#/$defs/free_text"
+    }
+  },
+  "required": [
+    "outcome"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "not_available"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "required": [
+          "callback"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "handed_off"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "required": [
+          "connected",
+          "waited_seconds"
+        ]
+      }
+    }
+  ],
+  "additionalProperties": true
+}

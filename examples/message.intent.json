@@ -1,0 +1,12 @@
+{
+  "intent": "book",
+  "request": {
+    "service": "new-patient",
+    "slot": "sl_01J8A",
+    "for": {
+      "name": "Sohel S.",
+      "contact": "+17755551234"
+    },
+    "note": "First visit."
+  }
+}

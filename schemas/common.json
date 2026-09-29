@@ -1,0 +1,243 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/common.json",
+  "title": "ATEP 1.0 shared definitions",
+  "description": "Definitions shared by the ATEP schemas. Section references are to ATEP 1.0 draft 2.",
+  "$defs": {
+    "version": {
+      "description": "Section 3. The string \"1.0\"; minor versions are backward compatible.",
+      "type": "string",
+      "pattern": "^1\\.[0-9]+$"
+    },
+    "e164": {
+      "description": "Section 3. E.164 with leading +.",
+      "type": "string",
+      "pattern": "^\\+[1-9][0-9]{1,14}$"
+    },
+    "e164_digits": {
+      "description": "Section 5.2. E.164 digits without the leading +, as carried in a DTMF pointer.",
+      "type": "string",
+      "pattern": "^[1-9][0-9]{1,14}$"
+    },
+    "timestamp": {
+      "description": "Section 3. RFC 3339 with offset.",
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}[Tt][0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "clock_time": {
+      "description": "Section 4.1 hours.weekly. Local wall clock time, HH:MM.",
+      "type": "string",
+      "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+    },
+    "id": {
+      "description": "Section 3. Every identifier - id, session, reference, nonce, kid, verification_id, and slot ids - is an opaque string of at most 128 characters, unique within its issuer.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "https_url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://",
+      "maxLength": 2048
+    },
+    "email": { "type": "string", "format": "email", "maxLength": 254 },
+    "free_text": {
+      "description": "Section 3. A free-text field - note, reason, text, summary, instructions, expected_response, statement, detail.text, and the elements of includes and excludes - at most 500 characters.",
+      "type": "string",
+      "maxLength": 500
+    },
+    "money": {
+      "description": "Section 3. Amount in major units as a decimal number.",
+      "type": "object",
+      "properties": {
+        "amount": { "type": "number" },
+        "currency": { "type": "string", "pattern": "^[A-Z]{3}$" }
+      },
+      "required": ["amount", "currency"],
+      "additionalProperties": true
+    },
+    "challenge": {
+      "description": "Section 5.3. Four decimal digits.",
+      "type": "string",
+      "pattern": "^[0-9]{4}$"
+    },
+    "platform_code": {
+      "description": "Section 4.4. Registry platform code, 2 to 6 digits.",
+      "type": "string",
+      "pattern": "^[0-9]{2,6}$"
+    },
+    "digest": {
+      "description": "Section 3. sha256: followed by the lowercase hex SHA-256 of the JCS form of the object.",
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "jws": {
+      "description": "Section 3. JWS compact serialization; the payload is detached, so the middle segment is empty.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]*\\.[A-Za-z0-9_-]+$"
+    },
+    "jwk": {
+      "description": "Section 4.1. A JWK (RFC 7517) carrying a kid named by the JWS header.",
+      "type": "object",
+      "properties": {
+        "kid": { "$ref": "#/$defs/id" },
+        "kty": { "type": "string" },
+        "crv": { "type": "string" },
+        "x": { "type": "string" },
+        "use": { "type": "string", "enum": ["sig"] },
+        "alg": { "type": "string", "enum": ["EdDSA", "ES256"] },
+        "expires": {
+          "description": "Section 4.1. A key MAY carry expires (RFC 3339) for rotation.",
+          "$ref": "#/$defs/timestamp"
+        }
+      },
+      "required": ["kid", "kty"],
+      "additionalProperties": true
+    },
+    "core_intent": {
+      "description": "Section 8. The seven intents.",
+      "type": "string",
+      "enum": ["availability", "book", "reschedule", "cancel", "quote", "message", "handoff"]
+    },
+    "extension_intent": {
+      "description": "Section 8.8. x-<vendor>-<name>.",
+      "type": "string",
+      "pattern": "^x-[a-z0-9]+-[a-z0-9][a-z0-9-]*$"
+    },
+    "intent_name": {
+      "anyOf": [{ "$ref": "#/$defs/core_intent" }, { "$ref": "#/$defs/extension_intent" }]
+    },
+    "day": {
+      "type": "string",
+      "enum": ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+    },
+    "time_of_day": {
+      "type": "string",
+      "enum": ["morning", "afternoon", "evening"]
+    },
+    "language": {
+      "description": "Section 4.1 languages, Section 6.2 language. A BCP 47 tag.",
+      "type": "string",
+      "pattern": "^[A-Za-z]{2,3}(-[A-Za-z0-9]{2,8})*$"
+    },
+    "service_ref": {
+      "description": "Section 4.1 services[].id, referenced by the availability and book intents.",
+      "$ref": "#/$defs/id"
+    },
+    "service_reason": {
+      "description": "Section 4.1. An entry of a service's reasons array: the only visit reasons a caller may give (Section 9).",
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string", "maxLength": 500 }
+      },
+      "required": ["id", "name"],
+      "additionalProperties": true
+    },
+    "service": {
+      "description": "Section 4.1. An entry of the card's services array.",
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string", "maxLength": 500 },
+        "duration_minutes": { "type": "integer", "minimum": 1 },
+        "reasons": {
+          "description": "Section 4.1 and Section 9. Optional; when present, a book request's reason MUST be one of these ids.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/service_reason" },
+          "minItems": 1
+        }
+      },
+      "required": ["id", "name"],
+      "additionalProperties": true
+    },
+    "slot": {
+      "description": "Section 8.1. A bookable slot.",
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "start": { "$ref": "#/$defs/timestamp" },
+        "duration_minutes": { "type": "integer", "minimum": 1 },
+        "provider": { "type": "string", "maxLength": 500 }
+      },
+      "required": ["id", "start"],
+      "additionalProperties": true
+    },
+    "window": {
+      "description": "A time window bounded by RFC 3339 timestamps.",
+      "type": "object",
+      "properties": {
+        "start": { "$ref": "#/$defs/timestamp" },
+        "end": { "$ref": "#/$defs/timestamp" }
+      },
+      "required": ["start", "end"],
+      "additionalProperties": true
+    },
+    "date_window": {
+      "description": "Section 7.1 caps.date_window. Calendar dates.",
+      "type": "object",
+      "properties": {
+        "start": { "$ref": "#/$defs/date" },
+        "end": { "$ref": "#/$defs/date" }
+      },
+      "required": ["start", "end"],
+      "additionalProperties": true
+    },
+    "callback": {
+      "description": "Section 8.6 and 8.7. A number and a window in which a human may be reached.",
+      "type": "object",
+      "properties": {
+        "number": { "$ref": "#/$defs/e164" },
+        "window": { "$ref": "#/$defs/window" }
+      },
+      "required": ["number"],
+      "additionalProperties": true
+    },
+    "disclosure": {
+      "description": "Section 4.1. MUST contain \"AI\" or \"artificial\" or \"automated\" or \"virtual\" together with \"assistant\" or \"agent\", and MUST name the party.",
+      "type": "string",
+      "maxLength": 500,
+      "pattern": "^(?=[\\s\\S]*(AI|A\\.I\\.|[Aa]rtificial|[Aa]utomated|[Vv]irtual))(?=[\\s\\S]*([Aa]ssistant|[Aa]gent))[\\s\\S]+$"
+    },
+    "party_ref": {
+      "description": "Section 7.5. The party a receipt names.",
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string", "maxLength": 500 },
+        "card": { "$ref": "#/$defs/https_url" }
+      },
+      "required": ["id", "name"],
+      "additionalProperties": true
+    },
+    "principal_ref": {
+      "description": "Section 7.5. The principal a receipt names.",
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string", "maxLength": 500 },
+        "platform": { "$ref": "#/$defs/https_url" }
+      },
+      "required": ["id", "name"],
+      "additionalProperties": true
+    },
+    "cancellation_terms": {
+      "description": "Section 8.2 book response.",
+      "type": "object",
+      "properties": {
+        "text": { "$ref": "#/$defs/free_text" },
+        "fee": { "$ref": "#/$defs/money" },
+        "cutoff_hours": { "type": "number", "minimum": 0 }
+      },
+      "required": ["text"],
+      "additionalProperties": true
+    }
+  }
+}

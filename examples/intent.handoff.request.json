@@ -1,0 +1,5 @@
+{
+  "kind": "join_principal",
+  "reason": "The principal asked to be brought onto the call.",
+  "hold_budget_seconds": 900
+}

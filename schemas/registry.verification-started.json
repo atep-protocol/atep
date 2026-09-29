@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/registry.verification-started.json",
+  "title": "registry verification started response",
+  "description": "Section 4.4. The response to POST /v1/numbers.",
+  "type": "object",
+  "properties": {
+    "verification_id": {
+      "$ref": "common.json#/$defs/id"
+    },
+    "status": {
+      "const": "pending"
+    },
+    "sig": {
+      "description": "Section 4.4. A registry MUST serve responses signed per Section 3 with keys published in its own card.",
+      "$ref": "common.json#/$defs/jws"
+    }
+  },
+  "required": [
+    "verification_id",
+    "status",
+    "sig"
+  ],
+  "additionalProperties": true
+}

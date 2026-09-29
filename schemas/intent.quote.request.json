@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/intent.quote.request.json",
+  "title": "quote request",
+  "description": "Section 8.5. Requesting a quote runs on the standing delegation. Accepting one is a separate intent with request { accept: true, reference }, which MUST carry a mandate and MUST NOT exceed caps.max_spend.",
+  "type": "object",
+  "oneOf": [
+    {
+      "title": "request a quote",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "object",
+          "properties": {
+            "service": {
+              "$ref": "common.json#/$defs/service_ref"
+            },
+            "text": {
+              "$ref": "common.json#/$defs/free_text"
+            },
+            "quantity": {
+              "type": "number",
+              "minimum": 0
+            },
+            "location": {
+              "type": "string",
+              "maxLength": 500
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "additionalProperties": true
+        },
+        "budget": {
+          "description": "Section 8.5. Optional, from caps.max_spend.",
+          "$ref": "common.json#/$defs/money"
+        }
+      },
+      "required": [
+        "description"
+      ],
+      "not": {
+        "required": [
+          "accept"
+        ]
+      },
+      "additionalProperties": true
+    },
+    {
+      "title": "accept a quote",
+      "type": "object",
+      "properties": {
+        "accept": {
+          "const": true
+        },
+        "reference": {
+          "$ref": "common.json#/$defs/id"
+        }
+      },
+      "required": [
+        "accept",
+        "reference"
+      ],
+      "additionalProperties": true
+    }
+  ]
+}

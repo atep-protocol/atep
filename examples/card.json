@@ -1,0 +1,81 @@
+{
+  "atep": "1.0",
+  "party": {
+    "id": "urn:atep:party:9f2c0e4a-6e6d-4a2e-9b1a-3f4b0b9a1c77",
+    "name": "Cedar Grove Family Medicine",
+    "kind": "business",
+    "website": "https://cedargrovefm.example"
+  },
+  "numbers": [
+    "+14632513583"
+  ],
+  "endpoint": "https://api.example/atep/v1/sessions",
+  "keys": [
+    {
+      "kid": "2026-09",
+      "kty": "OKP",
+      "crv": "Ed25519",
+      "x": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo",
+      "use": "sig"
+    }
+  ],
+  "intents": [
+    "availability",
+    "book",
+    "reschedule",
+    "cancel",
+    "message",
+    "handoff"
+  ],
+  "services": [
+    {
+      "id": "new-patient",
+      "name": "New patient visit",
+      "duration_minutes": 30
+    },
+    {
+      "id": "follow-up",
+      "name": "Follow-up",
+      "duration_minutes": 15
+    }
+  ],
+  "hours": {
+    "timezone": "America/New_York",
+    "weekly": {
+      "mon": [
+        [
+          "09:00",
+          "17:00"
+        ]
+      ],
+      "tue": [
+        [
+          "09:00",
+          "17:00"
+        ]
+      ]
+    }
+  },
+  "languages": [
+    "en"
+  ],
+  "policies": {
+    "records_calls": true,
+    "no_record_mode": true,
+    "human_available": "business_hours",
+    "accepts_agents": "yes",
+    "no_sales": true,
+    "retention_days": 365,
+    "do_not_call_days": 30
+  },
+  "disclosure": "This is Cedar Grove Family Medicine's AI assistant.",
+  "healthcare": true,
+  "a2a": "https://cedargrovefm.example/.well-known/agent-card.json",
+  "contact": {
+    "technical": "it@cedargrovefm.example",
+    "abuse": "abuse@cedargrovefm.example"
+  },
+  "issued": "2026-09-23T00:00:00Z",
+  "expires": "2027-09-23T00:00:00Z",
+  "sig": "eyJhbGciOiJFZERTQSIsImtpZCI6IjIwMjYtMDkifQ..YW5zd2VyZXItc2lnbmF0dXJlLXBsYWNlaG9sZGVy"
+}

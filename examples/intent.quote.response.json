@@ -1,0 +1,17 @@
+{
+  "outcome": "quoted",
+  "price": {
+    "amount": 180,
+    "currency": "USD"
+  },
+  "includes": [
+    "The visit and a basic panel."
+  ],
+  "excludes": [
+    "Imaging.",
+    "Specialist referrals."
+  ],
+  "valid_until": "2026-10-23T00:00:00-04:00",
+  "terms": "Payable at the visit.",
+  "reference": "q_8823"
+}

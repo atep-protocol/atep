@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/message.bind.json",
+  "title": "bind body",
+  "description": "Section 6.2. The four digits the caller's leg heard on the call.",
+  "type": "object",
+  "properties": {
+    "heard": { "$ref": "common.json#/$defs/challenge" }
+  },
+  "required": ["heard"],
+  "additionalProperties": true
+}

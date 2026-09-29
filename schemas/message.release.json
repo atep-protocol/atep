@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/message.release.json",
+  "title": "release body",
+  "description": "Section 6.2. Empty.",
+  "type": "object",
+  "properties": {},
+  "additionalProperties": false
+}

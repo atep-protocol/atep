@@ -1,0 +1,40 @@
+{
+  "session": "s_01J8QK3ZP7W9V2X4Y6B8C0D2E4",
+  "intent": "book",
+  "outcome": "booked",
+  "outcome_channel": "atep",
+  "reference": "4471",
+  "summary": "Booked: new patient visit, Tuesday October 6 at 9:00 AM, for Sohel S., reference 4471.",
+  "details": {
+    "service": "new-patient",
+    "start": "2026-10-06T09:00:00-04:00",
+    "duration_minutes": 30
+  },
+  "principal": {
+    "id": "urn:atep:principal:c1b6a2d4-83e5-4f17-9a0c-2d5e6f708192",
+    "name": "Sohel S.",
+    "platform": "https://lydoh.com/.well-known/atep.json"
+  },
+  "party": {
+    "id": "urn:atep:party:9f2c0e4a-6e6d-4a2e-9b1a-3f4b0b9a1c77",
+    "name": "Cedar Grove Family Medicine",
+    "card": "https://cedargrovefm.example/.well-known/atep.json"
+  },
+  "delegation": "sha256:1f8b2c3d4e5f60718293a4b5c6d7e8f90a1b2c3d4e5f60718293a4b5c6d7e8f9",
+  "mandate": null,
+  "disclosures": {
+    "caller": "This is an AI assistant calling for Sohel S. Callback 7 7 5 5 5 5 1 2 3 4. ATEP.",
+    "answerer": "This is Cedar Grove Family Medicine's AI assistant. This call is recorded. ATEP."
+  },
+  "recorded": {
+    "caller": false,
+    "answerer": true
+  },
+  "machine_only": true,
+  "log_hash": "sha256:a0b1c2d3e4f5061728394a5b6c7d8e9f00112233445566778899aabbccddeeff",
+  "issued": "2026-09-23T14:30:41-04:00",
+  "signatures": {
+    "caller": "eyJhbGciOiJFZERTQSIsImtpZCI6IjIwMjYtMDgifQ..Y2FsbGVyLXNpZ25hdHVyZS1wbGFjZWhvbGRlcg",
+    "answerer": "eyJhbGciOiJFZERTQSIsImtpZCI6IjIwMjYtMDkifQ..YW5zd2VyZXItc2lnbmF0dXJlLXBsYWNlaG9sZGVy"
+  }
+}

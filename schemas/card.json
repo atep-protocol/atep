@@ -1,0 +1,316 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/card.json",
+  "title": "ATEP card",
+  "description": "Section 4.1. The JSON document served at /.well-known/atep.json, or at any HTTPS URL on the hosting platform's domain.",
+  "type": "object",
+  "properties": {
+    "atep": {
+      "$ref": "common.json#/$defs/version"
+    },
+    "party": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.json#/$defs/id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "business",
+            "platform"
+          ]
+        },
+        "website": {
+          "$ref": "common.json#/$defs/https_url"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "kind"
+      ],
+      "additionalProperties": true
+    },
+    "numbers": {
+      "description": "Section 4.1. The E.164 numbers this card answers for.",
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/e164"
+      },
+      "minItems": 1
+    },
+    "endpoint": {
+      "description": "Section 4.1. Accepts POST of a hello message. MUST be HTTPS.",
+      "$ref": "common.json#/$defs/https_url"
+    },
+    "keys": {
+      "description": "Section 4.1. A JWK Set array. At least one Ed25519 key MUST be present.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "common.json#/$defs/jwk"
+      },
+      "contains": {
+        "type": "object",
+        "properties": {
+          "kty": {
+            "const": "OKP"
+          },
+          "crv": {
+            "const": "Ed25519"
+          }
+        },
+        "required": [
+          "kty",
+          "crv"
+        ]
+      },
+      "minContains": 1
+    },
+    "intents": {
+      "description": "Section 4.1. The intents this party serves or can request. Extension intents MUST be listed here to be used.",
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/intent_name"
+      },
+      "minItems": 1
+    },
+    "services": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/service"
+      }
+    },
+    "hours": {
+      "type": "object",
+      "properties": {
+        "timezone": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "weekly": {
+          "description": "A closed set of day keys; each value is a list of [open, close] wall-clock pairs.",
+          "type": "object",
+          "properties": {
+            "mon": {
+              "$ref": "#/$defs/day_hours"
+            },
+            "tue": {
+              "$ref": "#/$defs/day_hours"
+            },
+            "wed": {
+              "$ref": "#/$defs/day_hours"
+            },
+            "thu": {
+              "$ref": "#/$defs/day_hours"
+            },
+            "fri": {
+              "$ref": "#/$defs/day_hours"
+            },
+            "sat": {
+              "$ref": "#/$defs/day_hours"
+            },
+            "sun": {
+              "$ref": "#/$defs/day_hours"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "timezone"
+      ],
+      "additionalProperties": true
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/language"
+      }
+    },
+    "policies": {
+      "type": "object",
+      "properties": {
+        "records_calls": {
+          "type": "boolean"
+        },
+        "no_record_mode": {
+          "type": "boolean"
+        },
+        "human_available": {
+          "type": "string",
+          "enum": [
+            "always",
+            "business_hours",
+            "never"
+          ]
+        },
+        "accepts_agents": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "verified_only",
+            "no"
+          ]
+        },
+        "no_sales": {
+          "type": "boolean"
+        },
+        "retention_days": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "do_not_call_days": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": true
+    },
+    "disclosure": {
+      "$ref": "common.json#/$defs/disclosure"
+    },
+    "healthcare": {
+      "type": "boolean"
+    },
+    "a2a": {
+      "$ref": "common.json#/$defs/https_url"
+    },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "technical": {
+          "$ref": "common.json#/$defs/email"
+        },
+        "abuse": {
+          "$ref": "common.json#/$defs/email"
+        }
+      },
+      "required": [
+        "technical"
+      ],
+      "additionalProperties": true
+    },
+    "issued": {
+      "$ref": "common.json#/$defs/timestamp"
+    },
+    "expires": {
+      "$ref": "common.json#/$defs/timestamp"
+    },
+    "sig": {
+      "$ref": "common.json#/$defs/jws"
+    }
+  },
+  "required": [
+    "atep",
+    "party",
+    "endpoint",
+    "keys",
+    "intents",
+    "disclosure",
+    "contact",
+    "issued",
+    "expires",
+    "sig"
+  ],
+  "allOf": [
+    {
+      "description": "Section 4.1. numbers is REQUIRED; only a card with kind \"platform\" MAY omit it.",
+      "if": {
+        "type": "object",
+        "properties": {
+          "party": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "platform"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          }
+        },
+        "required": [
+          "party"
+        ]
+      },
+      "then": true,
+      "else": {
+        "required": [
+          "numbers"
+        ]
+      }
+    },
+    {
+      "description": "Section 9. A healthcare answerer MUST declare retention_days and MUST set human_available to always or business_hours.",
+      "if": {
+        "type": "object",
+        "properties": {
+          "healthcare": {
+            "const": true
+          }
+        },
+        "required": [
+          "healthcare"
+        ]
+      },
+      "then": {
+        "properties": {
+          "policies": {
+            "type": "object",
+            "properties": {
+              "human_available": {
+                "enum": [
+                  "always",
+                  "business_hours"
+                ]
+              }
+            },
+            "required": [
+              "human_available",
+              "retention_days"
+            ]
+          }
+        },
+        "required": [
+          "policies"
+        ]
+      }
+    }
+  ],
+  "x-atep-max-lifetime": {
+    "description": "Section 4.1. expires MUST be no more than 400 days after issued.",
+    "from": "issued",
+    "to": "expires",
+    "maxSeconds": 34560000
+  },
+  "x-atep-disclosure-names-party": true,
+  "additionalProperties": true,
+  "$defs": {
+    "day_hours": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "prefixItems": [
+          {
+            "$ref": "common.json#/$defs/clock_time"
+          },
+          {
+            "$ref": "common.json#/$defs/clock_time"
+          }
+        ],
+        "minItems": 2,
+        "maxItems": 2,
+        "items": false
+      }
+    }
+  }
+}

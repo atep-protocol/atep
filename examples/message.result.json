@@ -1,0 +1,19 @@
+{
+  "intent": "book",
+  "response": {
+    "outcome": "booked",
+    "reference": "4471",
+    "start": "2026-10-06T09:00:00-04:00",
+    "duration_minutes": 30,
+    "provider": "Dr. Alvarez",
+    "instructions": "Bring your insurance card. Parking is behind the building.",
+    "cancellation_terms": {
+      "text": "Cancellation within 24 hours carries a $50 fee.",
+      "fee": {
+        "amount": 50,
+        "currency": "USD"
+      },
+      "cutoff_hours": 24
+    }
+  }
+}

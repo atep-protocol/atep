@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/registry.platform.json",
+  "title": "registry platform response",
+  "description": "Section 4.4. GET /v1/platforms/{code}. code is 2 to 6 digits, issued by the registry.",
+  "type": "object",
+  "properties": {
+    "code": {
+      "$ref": "common.json#/$defs/platform_code"
+    },
+    "card": {
+      "$ref": "common.json#/$defs/https_url"
+    },
+    "party": {
+      "$ref": "common.json#/$defs/id"
+    },
+    "verified_at": {
+      "$ref": "common.json#/$defs/timestamp"
+    },
+    "sig": {
+      "description": "Section 4.4. A registry MUST serve responses signed per Section 3 with keys published in its own card.",
+      "$ref": "common.json#/$defs/jws"
+    }
+  },
+  "required": [
+    "code",
+    "card",
+    "party",
+    "verified_at",
+    "sig"
+  ],
+  "additionalProperties": true
+}

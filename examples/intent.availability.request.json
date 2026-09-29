@@ -1,0 +1,20 @@
+{
+  "service": "new-patient",
+  "window": {
+    "start": "2026-10-01T00:00:00-04:00",
+    "end": "2026-10-31T23:59:59-04:00"
+  },
+  "preferences": {
+    "times_of_day": [
+      "morning"
+    ],
+    "days": [
+      "mon",
+      "tue",
+      "wed",
+      "thu",
+      "fri"
+    ]
+  },
+  "count": 5
+}

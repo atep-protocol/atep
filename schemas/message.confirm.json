@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/message.confirm.json",
+  "title": "confirm body",
+  "description": "Section 6.2 and Section 6.4. Read-back text both sides must match exactly.",
+  "type": "object",
+  "properties": {
+    "intent": { "$ref": "common.json#/$defs/intent_name" },
+    "summary": { "$ref": "common.json#/$defs/free_text" },
+    "accept": { "type": "boolean" },
+    "reason": { "$ref": "common.json#/$defs/free_text" }
+  },
+  "required": ["intent", "summary", "accept"],
+  "allOf": [
+    {
+      "description": "Section 6.4. accept: false carries a reason.",
+      "if": { "properties": { "accept": { "const": false } }, "required": ["accept"] },
+      "then": { "required": ["reason"] }
+    }
+  ],
+  "additionalProperties": true
+}

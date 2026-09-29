@@ -1,0 +1,14 @@
+{
+  "session": "s_01J8QK3ZP7W9V2X4Y6B8C0D2E4",
+  "challenge": "4831",
+  "records": true,
+  "accepts": [
+    "availability",
+    "book",
+    "reschedule",
+    "cancel",
+    "message",
+    "handoff"
+  ],
+  "healthcare": true
+}

@@ -1,0 +1,5 @@
+{
+  "kind": "need_human",
+  "reason": "The caller asked about a prescription refill, which is clinical content.",
+  "hold_budget_seconds": 900
+}

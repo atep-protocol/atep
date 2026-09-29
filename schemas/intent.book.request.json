@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/intent.book.request.json",
+  "title": "book request",
+  "description": "Section 8.2. Requires confirmation and a receipt. The date_window and max_bookings caps apply.",
+  "type": "object",
+  "properties": {
+    "service": {
+      "$ref": "common.json#/$defs/service_ref"
+    },
+    "slot": {
+      "description": "Section 8.2. An id from availability.",
+      "$ref": "common.json#/$defs/id"
+    },
+    "start": {
+      "$ref": "common.json#/$defs/timestamp"
+    },
+    "for": {
+      "description": "Section 8.2. Defaults to the delegation principal.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "contact": {
+          "$ref": "common.json#/$defs/e164"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "additionalProperties": true
+    },
+    "reason": {
+      "description": "Section 8.2 and Section 9. An id from the service's reasons, only if the card lists them.",
+      "$ref": "common.json#/$defs/id"
+    },
+    "note": {
+      "$ref": "common.json#/$defs/free_text"
+    }
+  },
+  "required": [
+    "service"
+  ],
+  "oneOf": [
+    {
+      "description": "Section 8.2. A slot id.",
+      "required": [
+        "slot"
+      ],
+      "not": {
+        "required": [
+          "start"
+        ]
+      }
+    },
+    {
+      "description": "Section 8.2. A start time.",
+      "required": [
+        "start"
+      ],
+      "not": {
+        "required": [
+          "slot"
+        ]
+      }
+    }
+  ],
+  "additionalProperties": true
+}

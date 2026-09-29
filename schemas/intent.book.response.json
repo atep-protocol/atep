@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/intent.book.response.json",
+  "title": "book response",
+  "description": "Section 8.2.",
+  "type": "object",
+  "properties": {
+    "outcome": {
+      "type": "string",
+      "enum": [
+        "booked",
+        "not_available",
+        "needs_human"
+      ]
+    },
+    "reference": {
+      "$ref": "common.json#/$defs/id"
+    },
+    "start": {
+      "$ref": "common.json#/$defs/timestamp"
+    },
+    "duration_minutes": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "provider": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "instructions": {
+      "description": "Section 8.2. What to bring, where to park.",
+      "$ref": "common.json#/$defs/free_text"
+    },
+    "cancellation_terms": {
+      "$ref": "common.json#/$defs/cancellation_terms"
+    }
+  },
+  "required": [
+    "outcome"
+  ],
+  "allOf": [
+    {
+      "description": "Section 8.2. A booking carries its reference and time.",
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "booked"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "required": [
+          "reference",
+          "start"
+        ]
+      }
+    }
+  ],
+  "additionalProperties": true
+}

@@ -1,0 +1,13 @@
+{
+  "atep": "1.0",
+  "id": "m_01J8QK0004",
+  "session": "s_01J8QK3ZP7W9V2X4Y6B8C0D2E4",
+  "ts": "2026-09-23T14:30:09-04:00",
+  "from": "urn:atep:party:9f2c0e4a-6e6d-4a2e-9b1a-3f4b0b9a1c77",
+  "type": "bound",
+  "human_audible": false,
+  "body": {
+    "bound_at": "2026-09-23T14:30:09-04:00"
+  },
+  "sig": "eyJhbGciOiJFZERTQSIsImtpZCI6IjIwMjYtMDkifQ..YW5zd2VyZXItc2lnbmF0dXJlLXBsYWNlaG9sZGVy"
+}

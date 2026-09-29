@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atep.io/schemas/1.0/message.handoff.json",
+  "title": "handoff body",
+  "description": "Section 6.2 and Section 8.7. Either side may send it.",
+  "type": "object",
+  "properties": {
+    "kind": { "type": "string", "enum": ["join_principal", "need_human"] },
+    "reason": { "$ref": "common.json#/$defs/free_text" },
+    "hold_budget_seconds": { "type": "integer", "minimum": 0 }
+  },
+  "required": ["kind", "reason"],
+  "additionalProperties": true
+}
