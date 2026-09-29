@@ -1,6 +1,6 @@
 # ATEP: the Agentic Telephone Exchange Protocol
 
-**Status: 1.0 draft 3, a draft for public comment.**
+**Status: 1.0 draft 3, a draft for public comment.** Hear the first live agent-to-agent call, with its timeline and signed receipt: https://atep.io/demo
 
 ATEP is what two AI agents say to each other when they meet on an ordinary telephone
 call. One is calling for a person, the other is answering for a business. Within the
